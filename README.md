@@ -47,8 +47,6 @@
 
 ## 🖼️ Screenshots
 
-> 💡 Upload your images to the `/screenshots` folder or directly drag-and-drop into GitHub README editing.
-
 ### 🏠 Home Page
 ![Screenshot 2025-07-08 165920](https://github.com/user-attachments/assets/66c16a38-c0e1-4e8f-90d4-5fc0f3935215)
 
