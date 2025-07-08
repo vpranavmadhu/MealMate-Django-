@@ -1,0 +1,66 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Delivery</title>
+    {% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'users/css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+</head>
+<body>
+
+<nav>
+    <h2>Food Delivery</h2>
+    <div class="nav-links">
+    <a href="{% url 'delivery:view_orders' username %}" class="nav-item" title="My Orders">
+        <i class="fas fa-box fa-lg"></i>
+        <span>Orders</span>
+    </a>
+    <a href="{% url 'delivery:view_cart' username %}" class="nav-item" title="View Cart">
+        <i class="fas fa-shopping-cart fa-lg"></i>
+        <span>Cart</span>
+    </a>
+    <a href="{% url 'users:signin' %}" class="nav-item" title="Log Out">
+        <i class="fas fa-sign-out-alt fa-lg"></i>
+        <span>Logout</span>
+    </a>
+</div>
+
+</nav>
+
+<h1>Hi {{username}}, Lets pick you favourite Restaurant</h1>
+<div class="card-container">
+    {% if li %}
+    {% for item in li %}
+    <div class="card">
+        <img src="{{ item.img }}" alt="Restaurant Image">
+        <div class="card-content">
+            <h3>{{ item.res_name }}</h3>
+            <p><strong>Category:</strong> {{ item.food_cat }}</p>
+            <p><strong>Rating:</strong> {{ item.rating }}</p>
+            <p><strong>Address:</strong> {{ item.address }}</p>
+            <a href="{% url 'delivery:view_cusmenu' item.id username %}">
+                <button>View Menu</button>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+    
+    
+    {% else %}
+    
+    <h1 class="empty">No Restaurant Found</h1>
+    
+    
+    
+    {% endif %}
+    
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Delivery - Cart</title>
+    <link rel="stylesheet" href="{% static 'delivery/css/cart.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <h2>Food Delivery</h2>
+    <div class="nav-links">
+    <a href="{% url 'users:cus_home' username %}" class="nav-item" title="View Restaurants">
+        <i class="fas fa-store fa-lg"></i>
+        <span>Restaurants</span>
+    </a>
+    <a href="{% url 'users:signin' %}" class="nav-item" title="Logout">
+        <i class="fas fa-sign-out-alt fa-lg"></i>
+        <span>Logout</span>
+    </a>
+</div>
+
+</nav>
+
+<!-- Main Container -->
+<div class="container">
+    <div class="cart-box">
+        {% if items %}
+            <h3>Your Cart</h3>
+
+            <!-- Cart Items -->
+            <div class="cart-container">
+                {% for item in items %}
+                <div class="cart-item">
+                    <img src="{{ item.item.item_img }}" alt="{{ item.item.item_name }}" class="item-img" />
+                    <div class="item-details">
+                        <h4>{{ item.item.item_name }}</h4>
+                        <p><strong>Price:</strong> ₹{{ item.item.price }}</p>
+                        <div class="quantity-controls">
+                            <a href="{% url 'delivery:cart_quantity' id=item.id op='-' %}" class="qty-btn">-</a>
+                            <span class="qty-value">{{ item.quantity }}</span>
+                            <a href="{% url 'delivery:cart_quantity' id=item.id op='+' %}" class="qty-btn">+</a>
+                        </div>
+                        <p><strong>Item Total:</strong> ₹{{ item.item_total }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Footer -->
+            <div class="cart-footer">
+                <p><strong>Total Price:</strong> ₹{{ total_price }}</p>
+                <button id="rzp-button">Proceed to Pay</button>
+            </div>
+            {% else %}
+             <h1 class="empty">Your cart is empty.</h1>
+             {% endif %}
+    </div>
+   
+</div>
+
+<!-- Razorpay Integration -->
+<script>
+    var options = {
+        key: "{{ razorpay_key_id }}",
+        amount: "{{ total_price|floatformat:2|add:'0.00'|floatformat:2 }}00", // amount in paisa
+        currency: "INR",
+        name: "Meal Mate",
+        description: "Order Payment",
+        order_id: "{{ order_id }}",
+        handler: function (response) {
+            alert("Payment Successful!");
+            window.location.href = "{% url 'delivery:ordersucess' username %}";
+        },
+        prefill: {
+            name: "{{ username }}",
+            email: "customer@example.com",
+            contact: "9999999999"
+        },
+        theme: {
+            color: "#528FF0"
+        }
+    };
+
+    var rzp = new Razorpay(options);
+
+    document.getElementById("rzp-button").onclick = function (e) {
+        rzp.open();
+        e.preventDefault();
+    };
+</script>
+
+</body>
+</html>

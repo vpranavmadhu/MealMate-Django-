@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders - Food Delivery</title>
+    <link rel="stylesheet" href="{% static 'delivery/css/orders.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <h2>Food Delivery</h2>
+    <div class="nav-links">
+    <a href="{% url 'users:cus_home' username %}" class="nav-item" title="View Restaurants">
+        <i class="fas fa-store fa-lg"></i>
+        <span>Restaurants</span>
+    </a>
+    <a href="{% url 'users:signin' %}" class="nav-item" title="Logout">
+        <i class="fas fa-sign-out-alt fa-lg"></i>
+        <span>Logout</span>
+    </a>
+</div>
+</nav>
+
+<!-- Orders Container -->
+<div class="container">
+    {% if li %}
+        {% for order in li %}
+        <div class="order-card">
+            <div class="order-header">
+                <h3>Order ID: #{{ order.id }}</h3>
+                <span class="order-date">{{ order.order_on|date:"d M Y, h:i A" }}</span>
+            </div>
+            <ul class="item-list">
+                {% for item in order.items.all %}
+                <li>
+                    <span>{{ item.item_name }}</span>
+                    <span>₹{{ item.price }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="order-footer">
+                <strong>Total: ₹{{ order.total_price }}</strong>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h1 class="no-orders">No Orders Yet</h1>
+    {% endif %}
+</div>
+
+</body>
+</html>

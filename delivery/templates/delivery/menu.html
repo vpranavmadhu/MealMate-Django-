@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Delivery</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'delivery/css/menu.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+    <body>
+
+        <nav>
+    <h2>Food Delivery</h2>
+    <div class="nav-links">
+    <a href="{% url 'users:admin_home' %}" class="nav-item" title="View Restaurants">
+        <i class="fas fa-store fa-lg"></i>
+        <span>Restaurants</span>
+    </a>
+    <a href="{% url 'users:signin' %}" class="nav-item" title="Logout">
+        <i class="fas fa-sign-out-alt fa-lg"></i>
+        <span>Logout</span>
+    </a>
+</div>
+</nav>
+
+    <div class="menu-card-container">
+        {% if menu %}
+        <a href="{% url 'delivery:add_menu' %}" class="menu-card-link">
+    <div class="menu-card-content add-card">
+        <div class="plus-icon">+</div>
+    </div>
+    </a>
+        {% for item in menu %}
+    <div class="menu-card">
+        <!-- Image -->
+        <img src="{{ item.item_img }}" alt="{{ item.item_name }} image" class="menu-image" />
+
+        <!-- Text Info -->
+        <div class="menu-info">
+            <h3>{{ item.item_name }}</h3>
+            <p><strong>Description:</strong> {{ item.description }}</p>
+            <p><strong>Price:</strong> ₹{{ item.price }}</p>
+            <p><strong>Available:</strong> {{ item.is_available }}</p>
+            <p><strong>Category:</strong> {{ item.category }}</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="menu-actions">
+            <a href="{% url 'delivery:delete_menu' item.id %}" onclick="return confirm('Are you sure?')">
+                <button class="danger-btn">Delete</button>
+            </a>
+            <a href="{% url "delivery:edit_menu" item.id %}">
+                <button class="update-btn">Update</button>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <a href="{% url "delivery:add_menu" %}">
+                <button class="add-btn">Add Menu</button>
+            </a>
+    
+    {% endif %}
+    
+</div>
+    </body>
+
+</html>
+
+

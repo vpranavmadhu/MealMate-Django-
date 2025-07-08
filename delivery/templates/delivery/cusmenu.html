@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Delivery</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'delivery/css/cusmenu.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<body>
+    <nav>
+        <h2>Food Delivery</h2>
+        <div class="nav-links">
+    <a href="{% url 'users:cus_home' username %}" class="nav-item" title="View Restaurants">
+        <i class="fas fa-store fa-lg"></i>
+        <span>Restaurants</span>
+    </a>
+    <a href="{% url 'delivery:view_cart' username %}" class="nav-item" title="View Cart">
+        <i class="fas fa-shopping-cart fa-lg"></i>
+        <span>Cart</span>
+    </a>
+    <a href="{% url 'users:signin' %}" class="nav-item" title="Logout">
+        <i class="fas fa-sign-out-alt fa-lg"></i>
+        <span>Logout</span>
+    </a>
+</div>
+
+    </nav>
+
+    <div class="menu-card-container">
+    {% if menu %}
+    {% for item in menu %}
+    <div class="menu-card">
+        <!-- Dish Image -->
+        <img src="{{ item.item_img }}" alt="{{ item.item_name }} image" class="menu-image" />
+
+        <!-- Info Section -->
+        <div class="menu-info">
+            <h3>{{ item.item_name }}</h3>
+            <p>{{ item.description }}</p>
+            <p><strong>Price:</strong> ₹{{ item.price }}</p>
+            <p><strong>Available:</strong> {{ item.is_available }}</p>
+            <p><strong>Category:</strong> {{ item.category }}</p>
+        </div>
+
+        <!-- Add to Cart Button -->
+        <form method="POST" action="{% url 'delivery:add_to_cart' item.id username %}">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('Are you sure you want to add to cart?')">Add to Cart</button>
+        </form>
+    </div>
+    {% endfor %}
+    
+    
+    {% else %}
+    
+    <h1 class="empty">No Menu Found</h1>
+    
+    {% endif %}
+    
+</div>
+</body>
+
+
+    
+</body>
+</html>

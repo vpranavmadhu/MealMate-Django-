@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Delivery</title>
+    {% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'users/css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+</head>
+<body>
+
+<nav>
+    <h2>Food Delivery</h2>
+    <div class="nav-links">
+    <a href="{% url 'delivery:add_res' %}" class="nav-item" title="Add Restaurant">
+        <i class="fas fa-store fa-lg"></i>
+        <span>Add Res</span>
+    </a>
+    <a href="{% url 'delivery:add_menu' %}" class="nav-item" title="Add Menu">
+        <i class="fas fa-utensils fa-lg"></i>
+        <span>Add Menu</span>
+    </a>
+    <a href="{% url 'users:signin' %}" class="nav-item" title="Log Out">
+        <i class="fas fa-sign-out-alt fa-lg"></i>
+        <span>Logout</span>
+    </a>
+</div>
+</nav>
+
+<table border="1">
+    <tr>
+        <th>Restaurant Name:</th>
+        <th>Category:</th>
+        <th>Rating</th>
+        <th>Image:</th>
+        <th>Address</th>
+        <th>View Menu</th>
+    </tr>
+    <tr>
+        {% if li %}
+        {% for item in li %}
+        <td>{{item.res_name}}</td>
+        <td>{{item.food_cat}}</td>
+        <td>{{item.rating}}</td>
+        <td><img src="{{item.img}}" alt="Restaurant Image"
+             height="100" width="100" /></td>
+        <td>{{item.address}}</td>
+        <td>
+            <a href="{% url "delivery:view_menu" item.id %}"><button>View Menu</button></a>
+            <a href="{% url "delivery:edit_res" item.id %}"><button>Edit</button></a>
+            <a href="{% url "delivery:delete_res" item.id %}"><button>Remove</button></a>
+        </td>
+    </tr>
+        {% endfor %}
+        
+        {% else %}
+        
+        <a href="{% url "delivery:add_res" %}">Add Restaurant</a>
+        
+        {% endif %}
+        
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MealMate</title>
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
+</head>
+<body>
+    <div class="form-box">
+        <h1>SIGN UP</h1>
+
+        {% if error %}
+         <p>{{error}}</p>    
+        {% endif %}
+
+
+        <form method="POST" action="{% url 'users:handle_signup' %}">
+            {% csrf_token %}
+            <label>NAME:</label>
+            <input type="text" name="username" required />
+
+            <label>PASSWORD:</label>
+            <input type="text" name="password" required />
+
+            <label>EMAIL:</label>
+            <input type="email" name="email" required />
+
+            <label>MOBILE:</label>
+            <input type="tel" name="mobile" required />
+
+            <label>ADDRESS:</label>
+            <input type="text" name="address" required />
+
+            <label for="role">ROLE: 
+            <select name="role" id="role" required>
+                <option value="customer" selected>Customer</option>
+                <option value="vendor">Vendor</option>
+            </select>
+            </label>
+
+            <button type="submit">SUBMIT</button>
+        </form>
+    
+
+    <div class="signup-link">
+        <a href="{% url 'users:signin' %}">already registered?Sign in</a>
+    </div>
+</div>
+    
+    
+</body>
+</html>

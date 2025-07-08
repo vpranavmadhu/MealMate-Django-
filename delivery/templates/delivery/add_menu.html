@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Delivery</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'delivery/css/add.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+    <body>
+
+        <nav>
+    <h2>Food Delivery</h2>
+    <div class="nav-links">
+    <a href="{% url 'users:admin_home' %}" class="nav-item" title="View Restaurants">
+        <i class="fas fa-store fa-lg"></i>
+        <span>Restaurants</span>
+    </a>
+    <a href="{% url 'users:signin' %}" class="nav-item" title="Logout">
+        <i class="fas fa-sign-out-alt fa-lg"></i>
+        <span>Logout</span>
+    </a>
+</div>
+</nav>
+
+<h1>Add Menu Here</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+
+    <button>Add</button>
+</form>
+
+
+    </body>
+
+</html>
+
+
+
+
+
+
+
+
+

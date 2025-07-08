@@ -1,0 +1,114 @@
+/* Reset & base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navigation bar */
+nav {
+    position: fixed; /* Makes it stick at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+    backdrop-filter: blur(8px); /* Modern blur effect */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; /* Stay above all content */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Optional subtle shadow */
+}
+
+/* Push down body content so it doesn't hide under navbar */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../images/home.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px; /* this is important for fixed nav */
+}
+
+nav h2 {
+    color: white;
+    font-size: 22px;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 8px;
+}
+
+.nav-item {
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+}
+
+.nav-item span {
+    display: block;
+    font-size: 8px;
+    margin-top: 5px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: white;
+    color: black;
+}
+
+h1 {
+    text-align: center;
+    margin: 2rem 0;
+    color: #333;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}

@@ -1,0 +1,81 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    background-image: url("../images/cart.jpeg"); /* optional */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Headings */
+h1 {
+    font-size: 32px;
+    color: #28a745;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Paragraphs */
+p {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Link Button */
+a {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 16px;
+}
+
+a:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    a {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+}
